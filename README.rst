@@ -28,24 +28,24 @@ Simple Example
 Registration Examples
 =====================
 
-Use your current models without any changes.
+Use your current models by only changing the inheritance from `pydantic.BaseModel` to `pydantic_decoder.DecoderModel`.
 
 .. code-block:: python
 
-    from pydantic import BaseModel
-    from pydantic_decoder import register_model, encode, decode
+    from pydantic_decoder import DecoderModel, register_model, encode, decode
 
-    class MyModel(BaseModel):
+    class MyModel(DecoderModel):
         first_name: str
         last_name: str
 
-    class MyModel2(BaseModel):
+    class MyModel2(DecoderModel):
         first_name: str
         last_name: str
 
 
-    register_model(MyModel)
-    register_model('Model2', MyModel2)
+    # Subclasses of the DecoderModel are registered automatically
+    # register_model(MyModel)
+    # register_model('Model2', MyModel2)
 
     model = MyModel(first_name='John', last_name='Doe')
     msg = encode(model)
