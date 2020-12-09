@@ -143,6 +143,51 @@ def test_decoder_model_decode():
     assert m2 == model2
 
 
+# def test_field_property():
+#     from pydantic import BaseModel
+#     from pydantic_decoder import DecoderModel, field_property, encode, decode
+#
+#     class Props(DecoderModel):  # class Props(BaseModel):
+#         x: int = field_property('_x', default=0)  # getter is created with '_x'
+#
+#         @x.setter
+#         def x(self, value):
+#             self._x = value  # Note: matches field_property('_x')
+#
+#         y: int = field_property(default=0)
+#
+#         @y.getter
+#         def y(self) -> int:
+#             return getattr(self, '_y', 0)
+#
+#         @y.setter
+#         def y(self, value):
+#             if isinstance(value, float):
+#                 self._x = int(value * 10)
+#             self._y = int(value)
+#
+#         @field_property(default=0)
+#         def z(self):
+#             return getattr(self, '_z', 0)
+#
+#         @z.setter
+#         def z(self, value):
+#             self._z = value
+#
+#
+#     p = Props()
+#     print(p)
+#     p.x = 2
+#     p.y = 1.5
+#     print(p)
+#
+#     msg = encode(p)
+#     m = decode(msg)
+#     assert m.x == p.x, '{} != {}'.format(m.x, p.x)
+#     assert m.y == p.y, '{} != {}'.format(m.y, p.y)
+#     assert m.z == p.z, '{} != {}'.format(m.z, p.z)
+
+
 if __name__ == '__main__':
     test_import()
     test_register_model()
@@ -151,5 +196,7 @@ if __name__ == '__main__':
     test_decoder_model()
     test_decoder_model_dict()
     test_decoder_model_decode()
+
+    # test_field_property()
 
     print('All tests finished successfully!')
