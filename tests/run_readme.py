@@ -1,15 +1,6 @@
-================
-pydantic_decoder
-================
-
-Convert json text back into proper Pydantic models.
 
 
-Simple Example
-==============
-
-.. code-block:: python
-
+def run_readme1():
     from pydantic_decoder import DecoderModel, encode, decode
 
 
@@ -25,13 +16,7 @@ Simple Example
     assert isinstance(m, MyModel)
 
 
-Registration Examples
-=====================
-
-Use your current models by only changing the inheritance from `pydantic.BaseModel` to `pydantic_decoder.DecoderModel`.
-
-.. code-block:: python
-
+def run_readme2():
     from pydantic_decoder import DecoderModel, register_model, encode, decode
 
     class MyModel(DecoderModel):
@@ -58,3 +43,10 @@ Use your current models by only changing the inheritance from `pydantic.BaseMode
     m2 = decode(msg)
     assert m2 == model2
     assert isinstance(m2, MyModel2)
+
+
+if __name__ == '__main__':
+    run_readme1()
+    run_readme2()
+
+    print('All tests finished successfully!')
