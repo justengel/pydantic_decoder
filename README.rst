@@ -18,11 +18,31 @@ Simple Example
         last_name: str
 
 
+    class Person(DecoderModel):
+        first_name: str
+        last_name: str
+        dob: str = None
+
+
     model = MyModel(first_name='John', last_name='Doe')
     msg = model.json()
     m = model.decode(msg)
     assert m == model
     assert isinstance(m, MyModel)
+
+    # Call generic encode and decode without knowledge of the class.
+    john = Person(first_name='John', last_name='Doe', dob='11/11/2021')
+    msg = encode(john)
+    p = decode(msg)
+    assert john == p
+    assert isinstance(p, Person)
+
+    msg = encode(model)
+    m = decode(msg)
+    assert m == model
+    assert isinstance(m, MyModel)
+
+
 
 
 Registration Examples
